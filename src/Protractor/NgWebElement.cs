@@ -10,7 +10,7 @@ namespace Protractor
     /// <summary>
     /// Provides a mechanism to get elements off the page for test.
     /// </summary>
-    public class NgWebElement : IWebElement, IWrapsElement
+    public class NgWebElement : IWebElement, IWrapsElement, IWrapsDriver
     {
         private NgWebDriver ngDriver;
         private IWebElement element;
@@ -43,6 +43,15 @@ namespace Protractor
         {
             get { return this.element; }
         }
+
+        #endregion
+
+        #region IWrapsDriver Members
+
+        /// <summary>
+        /// Gets the wrapped <see cref="IWebDriver"/> instance.
+        /// </summary>
+        public IWebDriver WrappedDriver => ngDriver;
 
         #endregion
 
