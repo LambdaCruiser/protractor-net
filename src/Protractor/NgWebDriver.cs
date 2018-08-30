@@ -11,7 +11,7 @@ namespace Protractor
     /// <summary>
     /// Provides a mechanism to write tests against an AngularJS application.
     /// </summary>
-    public class NgWebDriver : IWebDriver, IWrapsDriver, IJavaScriptExecutor
+    public class NgWebDriver : IWebDriver, IWrapsDriver, IJavaScriptExecutor, ITakesScreenshot
     {
         private const string AngularDeferBootstrap = "NG_DEFER_BOOTSTRAP!";
 
@@ -66,6 +66,19 @@ namespace Protractor
         public IWebDriver WrappedDriver
         {
             get { return this.driver; }
+        }
+
+        #endregion
+
+        #region ITakesScreenshots Members
+
+        /// <summary>
+        /// Delegate GetScreenshot to WrappedDriver.
+        /// </summary>
+        /// <returns></returns>
+        public Screenshot GetScreenshot()
+        {
+            return ((ITakesScreenshot)this.WrappedDriver).GetScreenshot();
         }
 
         #endregion
